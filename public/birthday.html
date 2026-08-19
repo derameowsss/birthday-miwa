@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Miwa♥</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: linear-gradient(180deg, #05091a 0%, #080e2a 40%, #0a1235 70%, #05091a 100%);
+      color: #e8eeff;
+      font-family: 'Lato', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(79,142,247,0.3); border-radius: 2px; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+      50%      { transform: translateY(-22px) rotate(180deg); opacity: 1; }
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: 0.15; transform: scale(1); }
+      50%     { opacity: 1; transform: scale(1.5); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      14%  { transform: scale(1.2); }
+      28%  { transform: scale(1); }
+      42%  { transform: scale(1.1); }
+      70%  { transform: scale(1); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    @keyframes scrollBounce {
+      0%,100% { transform: translateY(0); opacity: 0.5; }
+      50%     { transform: translateY(8px); opacity: 1; }
+    }
+
+    .font-display { font-family: 'Playfair Display', serif; }
+
+    .shimmer-text {
+      background: linear-gradient(90deg, #a8c4ff, #ffffff, #7eb8ff, #ffffff, #a8c4ff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .glass {
+      background: rgba(13,21,53,0.6);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(79,142,247,0.15);
+      border-radius: 1.5rem;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #93c5fd;
+      animation: twinkle ease-in-out infinite;
+    }
+    .heart-p {
+      position: absolute;
+      color: #93c5fd;
+      user-select: none;
+      pointer-events: none;
+      animation: float linear infinite;
+    }
+
+    section, footer { position: relative; z-index: 1; }
+
+    .scroll-fade {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .scroll-fade.visible { opacity: 1; transform: translateY(0); }
+
+    /* Hero */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+    .hero-eyebrow {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: rgba(147,197,253,0.7);
+      font-size: 1.1rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(3rem, 10vw, 7rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      color: #bfdbfe;
+      margin-bottom: 0.4rem;
+    }
+    .hero-nickname {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: rgba(96,165,250,0.6);
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .hero-sub {
+      color: rgba(147,197,253,0.7);
+      font-size: 1.2rem;
+      font-weight: 300;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: fadeInUp 1s 1.4s ease forwards;
+      opacity: 0;
+    }
+    .scroll-indicator p {
+      color: rgba(96,165,250,0.5);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+    .scroll-indicator .arrow {
+      color: rgba(96,165,250,0.5);
+      font-size: 1.4rem;
+      animation: scrollBounce 1.5s ease-in-out infinite;
+    }
+
+    /* Letter */
+    #letter {
+      padding: 7rem 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .letter-card {
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+      padding: 3.5rem 2.5rem;
+    }
+    .heartbeat-icon {
+      font-size: 3rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      animation: heartbeat 1.8s ease-in-out infinite;
+    }
+    .letter-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+    .letter-body {
+      color: rgba(191,219,254,0.8);
+      font-size: 1.1rem;
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+    .letter-divider {
+      margin: 2.5rem auto;
+      height: 1px;
+      width: 80%;
+      background: linear-gradient(to right, transparent, rgba(96,165,250,0.3), transparent);
+    }
+    .letter-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #93c5fd;
+      font-size: 1.2rem;
+    }
+
+    /* Reasons */
+    #reasons { padding: 5rem 1.5rem; }
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: rgba(147,197,253,0.6);
+      font-style: italic;
+      font-size: 1.05rem;
+      margin-bottom: 3.5rem;
+    }
+    .reasons-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .reason-card {
+      background: rgba(13,21,53,0.6);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(79,142,247,0.15);
+      border-radius: 1rem;
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      transition: border-color 0.3s;
+    }
+    .reason-card:hover { border-color: rgba(96,165,250,0.4); }
+    .reason-number {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      line-height: 1;
+      color: rgba(79,142,247,0.3);
+      flex-shrink: 0;
+    }
+    .reason-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #bfdbfe;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      padding-top: 0.3rem;
+      transition: color 0.3s;
+    }
+    .reason-card:hover .reason-text { color: #fff; }
+
+    /* Gallery */
+    #gallery { padding: 5rem 1.5rem; }
+    .gallery-grid {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 640px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-card.tall { grid-row: span 1 !important; min-height: 200px !important; }
+    }
+    .gallery-card {
+      position: relative;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      background: #0d1535;
+      border: 1px solid rgba(79,142,247,0.15);
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      min-height: 200px;
+    }
+    .gallery-card.tall { grid-row: span 2; min-height: 420px; }
+    .gallery-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(79,142,247,0.2);
+    }
+    .gallery-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, #0d1c4a 0%, #0d1535 100%);
+      padding: 1.5rem;
+    }
+    .gallery-placeholder .ph-heart { font-size: 2.5rem; color: rgba(96,165,250,0.25); }
+    .gallery-placeholder p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: rgba(96,165,250,0.35);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      inset: 0;
+    }
+    .gallery-caption {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(5,9,26,0.85) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+    .gallery-card:hover .gallery-caption { opacity: 1; }
+    .gallery-caption p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #bfdbfe;
+      font-size: 0.9rem;
+    }
+    .gallery-hint {
+      text-align: center;
+      margin-top: 2rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: rgba(96,165,250,0.35);
+      font-size: 0.85rem;
+    }
+
+    /* Wish */
+    #wish {
+      padding: 7rem 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .wish-card {
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+      padding: 4rem 2.5rem;
+      background: linear-gradient(135deg, #0d1c4a 0%, #132047 50%, #0d1535 100%);
+      border: 1px solid rgba(79,142,247,0.25);
+      border-radius: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .wish-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(79,142,247,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .wish-eyebrow {
+      color: #60a5fa;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .wish-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+    .wish-body {
+      color: rgba(191,219,254,0.7);
+      font-size: 1.05rem;
+      line-height: 1.9;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+    .wish-sign {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: #93c5fd;
+    }
+    .hb-heart {
+      font-size: 1.5rem;
+      display: inline-block;
+      animation: heartbeat 1.8s ease-in-out infinite;
+    }
+    .hb-heart.delayed { animation-delay: 0.3s; }
+    .wish-sign .label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(96,165,250,0.1);
+    }
+    footer p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: rgba(96,165,250,0.4);
+      font-size: 1.05rem;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5,9,26,0.95);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 1rem;
+      object-fit: contain;
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: #93c5fd;
+      font-size: 2.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="particles"></div>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="fade-in-up" style="animation-delay:0.2s">
+      <p class="hero-eyebrow">A MESSAGE THAT I MADE JUST FOR YOU</p>
+      <h1 class="hero-title"><span class="shimmer-text">Happy Birthday</span></h1>
+      <h2 class="hero-name">Distra Aurelia Faradina ♥</h2>
+      <p class="hero-nickname">The Most Affectionate Woman</p>
+    </div>
+    <div class="scroll-indicator">
+      <p>Scroll</p>
+      <span class="arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- Letter -->
+  <section id="letter">
+    <div class="letter-card glass scroll-fade">
+      <div class="heartbeat-icon">♥</div>
+      <h2 class="letter-title">To the one who lights up my world</h2>
+      <p class="letter-body">
+        Setiap hari bersama kamu terasa seperti hadiah yang tak pernah kusangka, Setiap hari yang kujalani tanpa kamu adalah hari terberat yang pernah ku jalani. Tawamu adalah suara favoritku, Senyummu adalah pemandangan favoritku. Dan mencintai kamu adalah hal terbaik yang pernah aku lakukan.
+      </p>
+      <p class="letter-body">
+        Di hari ulang tahunmu, aku mau kamu tau bahwa bahkan ketika aku terpuruk sekalipun, sayangku ke kamu nggak akan pernah berkurang sedikitpun. Di saat aku berada di titik terendahku , aku tetap sayang sama kamu, tetap memilih kamu, dan tetap ingin bersama kamu. hari ini, esok, dan selamanya.
+      </p>
+      <div class="letter-divider"></div>
+      <p class="letter-quote">"You are my home — Where I can be myself, feel at peace, adn always find my way back."</p>
+    </div>
+  </section>
+
+  <!-- Reasons -->
+  <section id="reasons">
+    <div class="scroll-fade">
+      <h2 class="section-heading">Reasons I Love You</h2> 
+      <p class="section-sub">just a few — the full list would fill the ocean</p>
+    </div>
+    <div class="reasons-list" id="reasons-list"></div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="scroll-fade">
+      <h2 class="section-heading">You, Through My Eyes</h2>
+      <p class="section-sub" style="font-style:italic">A Little Collection Of The Person I Love.</p>
+    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+    <p class="gallery-hint"></p>
+  </section>
+
+  <!-- Wish -->
+  <section id="wish">
+    <div class="wish-card scroll-fade">
+      <p class="wish-eyebrow">My wish for you</p>
+      <h2 class="wish-title">
+        May This Year Be<br>
+        As <span class="shimmer-text">Beatiful</span> As <span class="shimmer-text">You</span>
+      </h2>
+      <p class="wish-body">
+        Semoga semua yang selama ini kamu perjuangkan akhirnya bisa menjadi nyata. Aku tau kamu ingin masuk Universitas Airlangga, Aku benar benar berharap suatu hari nanti aku bisa melihat kamu mengenakan almamater yang selama ini kamu inginkan.<br>
+        <br>
+        Kalau nanti jalannya nggak mudah, jangan pernah merasa kamu nggak cukup baik. Kamu mungkin capek, takut, atau bahkan sempat merasa ingin menyerah. Tapi aku harap kamu tetap percama sama dirimu sendiri.<br>
+        <br>
+        Aku ingin melihat kamu tumbuh, mengejar cita citamu, dan mendapatkan kehidupan yang kamu inginkan. Dan apapun hasilnya nanti, aku akan tetap bangga sama kamu karena aku tahu seberapa keras kamu sudah berusaha.<br>
+        <br>
+        Semoga tahun ini membawa kamu lebih dekat dengan semua impianmu. Dan semoga salah satu hal yang bisa aku lakukakn adalah tetap berada di sampingmu, mendukungmu, dan mengingatkanmu bahwa kamu nggak harus melewati semuanya sendirian.<br>
+      </p>
+      <div class="wish-sign">
+        <span class="hb-heart">♥</span>
+        <span class="label">Happy Birthday, Miwa</span>
+        <span class="hb-heart delayed">♥</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Little gift from Sundaii ♥</p>
+  </footer>
+
+  <div id="lightbox">
+    <button id="lightbox-close"></button>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script>
+    // Particles
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2.5 + 0.5;
+      star.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*5}s;animation-duration:${Math.random()*3+2}s;`;
+      container.appendChild(star);
+    }
+    for (let i = 0; i < 12; i++) {
+      const h = document.createElement('div');
+      h.className = 'heart-p';
+      h.textContent = '♥';
+      h.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${Math.random()*16+10}px;opacity:${Math.random()*0.25+0.06};animation-delay:${Math.random()*6}s;animation-duration:${Math.random()*4+4}s;`;
+      container.appendChild(h);
+    }
+
+    // Reasons
+    const reasons = [
+      "Senyum kamu selalu punya cara sederhana buat bikin hariku terasa jauh lebih baik.",
+      "Cara kamu memperlakukan orang lain dengan lembut selalu bikin aku semakin kagum sama kamu.",
+      "Walaupun kita berjauhan, bersamamu selalu terasa seperti pulang.",
+      "Terima kasih karena tetap sabar menghadapi sifatku, bahkan di saat aku sendiri sulit memahami diriku sendiri.",
+      "Kamu membuatku tahu bagaimana rasanya dicintai dengan tulus, tanpa harus menjadi seseorang yang sempurna.",
+      "Saat aku meragukan diriku sendiri, kamu sering menjadi alasan kenapa aku mau mencoba sekali lagi.",
+      "Yang paling aku syukuri adalah kamu tetap ada. Di saat semuanya terasa mudah maupun ketika hidup sedang tidak berpihak padaku.",
+      "Dari sekian banyak orang di dunia ini, entah bagaimana aku dipertemukan denganmu. Dan kalau suatu hari aku harus memilih lagi, diantara kemungkinan yang ada, aku tetap akan memilih kamu. Lagi dan lagi, Sekarang dan Selamanya.",
+    ];
+    const list = document.getElementById('reasons-list');
+    reasons.forEach((text, i) => {
+      list.innerHTML += `
+        <div class="reason-card scroll-fade">
+          <span class="reason-number">${String(i+1).padStart(2,'0')}</span>
+          <p class="reason-text">${text}</p>
+        </div>`;
+    });
+
+    // Gallery
+    const photos = [
+      { src: "images/beauty.jpg", caption: "The Beauty♥",                                           tall: false },
+      { src: "images/cute.jpg", caption: "You With Your Cute Pose♥",                                           tall: true },
+      { src: "images/elegant.jpg", caption: "You With Your Elegant Pose♥",                                           tall: false },
+      { src: "images/mirrorselfie.jpg", caption: "Your Mirror Selfie♥",                                           tall: true },
+      { src: "images/herclass.jpg", caption: "You In Your Classroom",                                           tall: false },
+      { src: "images/withkei.jpg", caption: "You With Your Sister♥",                                           tall: false },
+      { src: "images/yourcheek2.jpg", caption: "My Favorite Chubby Cheeks♥",                                           tall: true },
+      { src: "images/shy.jpg", caption: "A little shy, a lot beautiful♥",                                           tall: false },
+      { src: "images/shy2.jpg", caption: "Shy♥",                                           tall: false },
+      { src: "images/inblue2.jpg", caption: "Beautiful In Blue♥",                                           tall: true },
+      { src: "music/us.jpg", caption: "Me & You♥",                                                  tall: true},
+      { src: "images/blurtiful2.jpg", caption: "Blurtiful♥",                                           tall: false },
+      { src: "images/lovely.jpg", caption: "Lovely Vibes♥",                                           tall: false },
+      
+    ];
+    const grid = document.getElementById('gallery-grid');
+    photos.forEach((photo, i) => {
+      const card = document.createElement('div');
+      card.className = 'gallery-card scroll-fade' + (photo.tall ? ' tall' : '');
+      const inner = photo.src
+        ? `<img src="${photo.src}" alt="${photo.caption}" loading="lazy" />`
+        : `<div class="gallery-placeholder"><div class="ph-heart">♥</div><p>Photo ${i+1}</p></div>`;
+      card.innerHTML = inner + `<div class="gallery-caption"><p>${photo.caption}</p></div>`;
+      if (photo.src) card.addEventListener('click', () => openLightbox(photo.src, photo.caption));
+      grid.appendChild(card);
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    function openLightbox(src, alt) { lbImg.src = src; lbImg.alt = alt; lightbox.classList.add('open'); }
+    document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+
+    // Scroll fade-in
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-fade').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

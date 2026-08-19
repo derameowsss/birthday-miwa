@@ -1,0 +1,10 @@
+{
+  "description": "Create personalized birthday websites effortlessly, featuring custom designs and themes to celebrate special moments for loved ones.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
