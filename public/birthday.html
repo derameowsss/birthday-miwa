@@ -12,15 +12,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background: linear-gradient(180deg, #05091a 0%, #080e2a 40%, #0a1235 70%, #05091a 100%);
-      color: #e8eeff;
+      background: linear-gradient(180deg, #081A3A 0%, #173B78 28%, #315DA8 55%, #4E5FAF 78%, #6B5F9E 100%);
+      color: #F4F7FF;
       font-family: 'Lato', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(79,142,247,0.3); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb { background: rgba(190, 214, 255, 0.38); border-radius: 2px; }
 
     @keyframes float {
       0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
@@ -53,7 +53,7 @@
     .font-display { font-family: 'Playfair Display', serif; }
 
     .shimmer-text {
-      background: linear-gradient(90deg, #a8c4ff, #ffffff, #7eb8ff, #ffffff, #a8c4ff);
+      background: linear-gradient(90deg, #BFD8FF, #FFFFFF, #D9C7FF, #FFFFFF, #BFD8FF);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -62,9 +62,9 @@
     }
 
     .glass {
-      background: rgba(13,21,53,0.6);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(79,142,247,0.15);
+      background: rgba(7, 18, 45, 0.68);
+      backdrop-filter: blur(16px); box-shadow: 0 18px 50px rgba(3, 10, 28, 0.18);
+      border: 1px solid rgba(190, 214, 255, 0.22);
       border-radius: 1.5rem;
     }
 
@@ -83,12 +83,12 @@
     .star {
       position: absolute;
       border-radius: 50%;
-      background: #93c5fd;
+      background: #D9E8FF;
       animation: twinkle ease-in-out infinite;
     }
     .heart-p {
       position: absolute;
-      color: #93c5fd;
+      color: #D9E8FF;
       user-select: none;
       pointer-events: none;
       animation: float linear infinite;
@@ -116,13 +116,14 @@
     .hero-eyebrow {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      color: rgba(147,197,253,0.7);
+      color: rgba(232, 240, 255, 0.78);
       font-size: 1.1rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
     }
     .hero-title {
+      text-shadow: 0 4px 24px rgba(3, 10, 28, 0.45);
       font-family: 'Playfair Display', serif;
       font-weight: 700;
       font-size: clamp(3rem, 10vw, 7rem);
@@ -133,18 +134,18 @@
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-size: clamp(1.8rem, 5vw, 3.5rem);
-      color: #bfdbfe;
+      color: #EAF1FF;
       margin-bottom: 0.4rem;
     }
     .hero-nickname {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      color: rgba(96,165,250,0.6);
+      color: rgba(220, 229, 255, 0.78);
       font-size: 1.5rem;
       margin-bottom: 2rem;
     }
     .hero-sub {
-      color: rgba(147,197,253,0.7);
+      color: rgba(232, 240, 255, 0.78);
       font-size: 1.2rem;
       font-weight: 300;
       max-width: 480px;
@@ -161,13 +162,13 @@
       opacity: 0;
     }
     .scroll-indicator p {
-      color: rgba(96,165,250,0.5);
+      color: rgba(225, 234, 255, 0.68);
       font-size: 0.7rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
     }
     .scroll-indicator .arrow {
-      color: rgba(96,165,250,0.5);
+      color: rgba(225, 234, 255, 0.68);
       font-size: 1.4rem;
       animation: scrollBounce 1.5s ease-in-out infinite;
     }
@@ -198,7 +199,7 @@
       margin-bottom: 2rem;
     }
     .letter-body {
-      color: rgba(191,219,254,0.8);
+      color: rgba(240, 245, 255, 0.82);
       font-size: 1.1rem;
       line-height: 1.9;
       font-weight: 300;
@@ -213,7 +214,7 @@
     .letter-quote {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      color: #93c5fd;
+      color: #D9E8FF;
       font-size: 1.2rem;
     }
 
@@ -229,7 +230,7 @@
     }
     .section-sub {
       text-align: center;
-      color: rgba(147,197,253,0.6);
+      color: rgba(230, 238, 255, 0.72);
       font-style: italic;
       font-size: 1.05rem;
       margin-bottom: 3.5rem;
@@ -242,9 +243,9 @@
       gap: 1.2rem;
     }
     .reason-card {
-      background: rgba(13,21,53,0.6);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(79,142,247,0.15);
+      background: rgba(7, 18, 45, 0.68);
+      backdrop-filter: blur(16px); box-shadow: 0 18px 50px rgba(3, 10, 28, 0.18);
+      border: 1px solid rgba(190, 214, 255, 0.22);
       border-radius: 1rem;
       padding: 1.5rem 1.8rem;
       display: flex;
@@ -258,13 +259,13 @@
       font-weight: 700;
       font-size: 2.5rem;
       line-height: 1;
-      color: rgba(79,142,247,0.3);
+      color: rgba(190, 214, 255, 0.38);
       flex-shrink: 0;
     }
     .reason-text {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      color: #bfdbfe;
+      color: #EAF1FF;
       font-size: 1.1rem;
       line-height: 1.7;
       padding-top: 0.3rem;
@@ -289,8 +290,8 @@
       position: relative;
       border-radius: 1.2rem;
       overflow: hidden;
-      background: #0d1535;
-      border: 1px solid rgba(79,142,247,0.15);
+      background: #0E2148;
+      border: 1px solid rgba(190, 214, 255, 0.22);
       cursor: pointer;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
       min-height: 200px;
@@ -298,7 +299,7 @@
     .gallery-card.tall { grid-row: span 2; min-height: 420px; }
     .gallery-card:hover {
       transform: scale(1.02);
-      box-shadow: 0 0 40px rgba(79,142,247,0.2);
+      box-shadow: 0 0 40px rgba(180, 207, 255, 0.22);
     }
     .gallery-placeholder {
       position: absolute;
@@ -308,7 +309,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      background: linear-gradient(135deg, #0d1c4a 0%, #0d1535 100%);
+      background: linear-gradient(135deg, #142F62 0%, #101F45 100%);
       padding: 1.5rem;
     }
     .gallery-placeholder .ph-heart { font-size: 2.5rem; color: rgba(96,165,250,0.25); }
@@ -333,7 +334,7 @@
       display: flex;
       align-items: flex-end;
       padding: 1rem;
-      background: linear-gradient(to top, rgba(5,9,26,0.85) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(5, 12, 30, 0.88) 0%, transparent 50%);
       opacity: 0;
       transition: opacity 0.3s ease;
       z-index: 2;
@@ -342,7 +343,7 @@
     .gallery-caption p {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      color: #bfdbfe;
+      color: #EAF1FF;
       font-size: 0.9rem;
     }
     .gallery-hint {
@@ -365,8 +366,8 @@
       width: 100%;
       text-align: center;
       padding: 4rem 2.5rem;
-      background: linear-gradient(135deg, #0d1c4a 0%, #132047 50%, #0d1535 100%);
-      border: 1px solid rgba(79,142,247,0.25);
+      background: linear-gradient(135deg, #16366F 0%, #202E68 50%, #171E4A 100%);
+      border: 1px solid rgba(190, 214, 255, 0.28);
       border-radius: 1.5rem;
       position: relative;
       overflow: hidden;
@@ -375,11 +376,11 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(79,142,247,0.18) 0%, transparent 65%);
+      background: radial-gradient(ellipse at 50% 0%, rgba(190, 214, 255, 0.18) 0%, transparent 65%);
       pointer-events: none;
     }
     .wish-eyebrow {
-      color: #60a5fa;
+      color: #BBD5FF;
       font-size: 0.75rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
@@ -394,7 +395,7 @@
       margin-bottom: 2rem;
     }
     .wish-body {
-      color: rgba(191,219,254,0.7);
+      color: rgba(238, 244, 255, 0.76);
       font-size: 1.05rem;
       line-height: 1.9;
       font-weight: 300;
@@ -405,7 +406,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      color: #93c5fd;
+      color: #D9E8FF;
     }
     .hb-heart {
       font-size: 1.5rem;
@@ -436,7 +437,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(5,9,26,0.95);
+      background: rgba(4, 9, 24, 0.96);
       z-index: 100;
       align-items: center;
       justify-content: center;
@@ -454,7 +455,7 @@
       right: 2rem;
       background: none;
       border: none;
-      color: #93c5fd;
+      color: #D9E8FF;
       font-size: 2.5rem;
       cursor: pointer;
       line-height: 1;
